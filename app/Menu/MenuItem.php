@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Menu;
+namespace MenuWithAuthentication\Menu;
 
 /**
  * Class MenuItem
- * @package App\Menu
+ * @package MenuWithAuthentication\Menu
  */
 class MenuItem
 {
@@ -36,8 +36,9 @@ class MenuItem
     /**
      * MenuItem constructor.
      */
-    public function __construct()
+    public function __construct($id)
     {
+
     }
 
     /**
@@ -116,6 +117,22 @@ class MenuItem
         }
         $this->user= $user;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->render();
+    }
+
+    public function render()
+    {
+        $data = array();
+        $data['url'] = $this->url;
+        $data['icon'] = $this>icon;
+        $data['title'] = $this->title;
+        $data['id'] = $this->id;
+
+        return (String) view('menu.menuitem', $data);
     }
 
 }

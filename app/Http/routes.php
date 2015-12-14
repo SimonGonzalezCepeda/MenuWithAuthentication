@@ -17,5 +17,5 @@ Route::get('/', function () {
 
 view()->composer(
     'partials.sidebar',
-    'App\Htpp\ViewComposers\SidebarComposer'
+    'MenuWithAuthentication\Htpp\ViewComposers\SidebarComposer'
 );

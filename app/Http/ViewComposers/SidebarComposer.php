@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\ViewComposers;
+namespace MenuWithAuthentication\Http\ViewComposers;
 
 
 
