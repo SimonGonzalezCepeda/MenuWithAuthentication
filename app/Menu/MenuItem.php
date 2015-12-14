@@ -6,8 +6,16 @@ namespace MenuWithAuthentication\Menu;
  * Class MenuItem
  * @package MenuWithAuthentication\Menu
  */
+/**
+ * Class MenuItem
+ * @package MenuWithAuthentication\Menu
+ */
 class MenuItem
 {
+    /**
+     * @var MenuItem
+     */
+    protected static $current;
     /**
      * @var
      */
@@ -35,10 +43,19 @@ class MenuItem
 
     /**
      * MenuItem constructor.
+     * @param $id
      */
     public function __construct($id)
     {
-
+        $this->id = $id;
+        if (is_null(static::$current))
+        {
+            static::$current = $this;
+            $this->level(0);
+        } else {
+            static::$current->addItem($this);
+            $this->level(static::$current->level()+1);
+        }
     }
 
     /**
@@ -119,20 +136,51 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->render();
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $data = array();
         $data['url'] = $this->url;
-        $data['icon'] = $this>icon;
+        $data['icon'] = $this->icon;
         $data['title'] = $this->title;
         $data['id'] = $this->id;
 
         return (String) view('menu.menuitem', $data);
+    }
+
+    /**
+     * @param null $level
+     * @return $this
+     */
+//    private function level($level=null)
+//    {
+//        if($title == null){
+//            return $this->title;
+//        }
+//
+//        $this->title = $title;
+//        return $this;
+//    }
+
+    /**
+     * @return $this
+     */
+    public function item()
+    {
+        $old = static::$current;
+        static::$current = $this;
+        static::$current = $old;
+        return $this;
     }
 
 }

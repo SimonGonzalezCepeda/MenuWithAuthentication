@@ -42,12 +42,13 @@ class MenuWithAuthentication
      * Te asegures de que tú mateix et crees.
      * Aquest métode genera objectes STATICS de si mateix,
      * que s'asegura que es genere una sola vegada.
+     * @param $id
      * @return null|static
      */
-    public static function instance()
+    public static function instance($id)
     {
         if(is_null(static::$instance)){
-            return static::$instance = new static;
+            return static::$instance = new static($id);
         }
         return static::$instance;
     }
