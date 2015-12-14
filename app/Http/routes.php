@@ -19,6 +19,3 @@ view()->composer(
     'partials.sidebar',
     'App\Htpp\ViewComposers\SidebarComposer'
 );
-Route::get('/home', function() {
-    return view('home');
-});
