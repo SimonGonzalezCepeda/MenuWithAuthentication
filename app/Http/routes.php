@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+view()->composer(
+    'partials.sidebar',
+    'App\Htpp\ViewComposers\SidebarComposer'
+);
+Route::get('/home', function() {
+    return view('home');
+});
